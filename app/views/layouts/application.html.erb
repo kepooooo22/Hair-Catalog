@@ -11,6 +11,31 @@
   </head>
 
   <body>
+    <header class="header">
+      <div class="inner">
+        <div class="nav">
+          <div class="nav__left">
+            <%= link_to "Hair Catalog.", root_path %>
+          </div>
+          <% if admin_signed_in? %>
+            <div class="nav__right">
+            <%= link_to current_admin.email, '#', class: :nav__btn %>
+            <%= link_to "ログアウト", destroy_admin_session_path, data: { turbo_method: :delete }, class: :nav__logout %>
+            </div>
+          <% elsif customer_signed_in? %>
+            <div class="nav__right">
+              <%= link_to current_customer.name, '#', class: :nav__btn %>
+              <%= link_to "ログアウト", destroy_customer_session_path, data: { turbo_method: :delete }, class: :nav__logout %>
+            </div>
+          <% else %>
+            <div class="nav__right">
+              <%= link_to "ログイン", new_customer_session_path, class: :nav__btn %>
+              <%= link_to "新規登録", new_customer_registration_path, class: :nav__btn %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </header>
     <%= yield %>
   </body>
 </html>
