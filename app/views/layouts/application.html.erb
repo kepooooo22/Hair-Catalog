@@ -20,12 +20,13 @@
           <% if admin_signed_in? %>
             <div class="nav__right">
             <%= link_to current_admin.email, '#', class: :nav__btn %>
-            <%= link_to "ログアウト", destroy_admin_session_path, data: { turbo_method: :delete }, class: :nav__logout %>
+            <%= link_to "商品一覧", admin_products_path, class: :nav__btn %>
+            <%= link_to "ログアウト", destroy_admin_session_path, data: { turbo_method: :delete }, class: :nav__btn %>
             </div>
           <% elsif customer_signed_in? %>
             <div class="nav__right">
               <%= link_to current_customer.name, '#', class: :nav__btn %>
-              <%= link_to "ログアウト", destroy_customer_session_path, data: { turbo_method: :delete }, class: :nav__logout %>
+              <%= link_to "ログアウト", destroy_customer_session_path, data: { turbo_method: :delete }, class: :nav__btn %>
             </div>
           <% else %>
             <div class="nav__right">

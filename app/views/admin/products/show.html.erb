@@ -1,0 +1,32 @@
+<main class="main">
+  <div class="inner">
+    <div class="prototype__wrapper">
+      <p class="prototype__hedding">
+        <%= @product.name %>
+      </p>
+      <div class="prototype__image">
+        <%= image_tag @product.image %>
+      </div>
+      <p class="prototype__hedding">
+      <%= number_to_currency(@product.price, unit: "¥", strip_insignificant_zeros: true) %></p>
+      </p>
+      <div class="prototype__body">
+        <div class="prototype__detail">
+          <p class="detail__message">
+            <%= @product.explanation %>
+          </p>
+        </div>
+        <div class="prototype__detail">
+          <p class="detail__message">
+            <% if @product.stock > 0 %>
+              在庫数 (<%= @product.stock %>)
+            <% else %>
+              売り切れ
+            <% end %>
+          </p>
+        </div>
+      </div>
+      <div class="prototype__manage">
+          <%= link_to "編集する", edit_admin_product_path(@product), class: :prototype__btn %>
+          <%= link_to "削除する", admin_product_path(@product), data: { turbo_method: :delete }, class: :prototype__btn %>
+      </div>
