@@ -1,0 +1,29 @@
+<div class="container-xl p-6">
+  <div class="row gap-9">
+    <div class="col-md-6">
+      <%= image_tag @product.image, class: "img-fluid rounded-xl" %>
+    </div>
+    <div class="col-md-6 sticky-top">
+      <div class="d-flex justify-content-between flex-column h-100">
+        <div>
+          <h1 class="text-2xl font-bold">
+            <%= @product.name %>
+          </h1>
+          <p class="text-2xl font-bold"><%= number_to_currency(@product.price, unit: "¥", strip_insignificant_zeros: true) %></p>
+        </div>
+        <div class="mb-3">
+          <p>
+            <%= @product.explanation %>
+          </p>
+        </div>
+        <div class="mb-8">
+          <% if @product.stock > 0 %>
+            <span class="bg-info text-white text-xs font-semibold px-2 py-1 rounded">在庫数 (<%= @product.stock %>)</span>
+          <% else %>
+            <span class="bg-danger text-white text-xs font-semibold px-2 py-1 rounded">売り切れ</span>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
