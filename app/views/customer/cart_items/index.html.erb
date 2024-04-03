@@ -1,0 +1,98 @@
+<div class="mb-8 text-center">
+  <h2 class="text-3xl font-bold">
+    お買い物かご
+  </h2>
+</div>
+
+<% if @cart_items.count == 0 %>
+  <div class='mx-auto max-w-3xl'>
+    <p class='mb-8 text-xl text-center'>まだ何も入っていません</p>
+    <div class='d-flex justify-content-center'>
+      <%= link_to products_path, class: 'btn btn-lg btn-primary' do %>
+        <span class='rounded-md bg-black px-5 py-2.5 transition-all duration-75 ease-in'>
+          商品を探す
+        </span>
+      <% end %>
+    </div>
+  </div>
+<% else %>
+  <div class="row">
+    <div class="col-md-8">
+      <div class="table-responsive">
+        <table class="table">
+          <thead>
+            <tr class="bg-gray-100 text-gray-600 uppercase text-sm leading-normal">
+              <th class="py-4 px-8">商品名</th>
+              <th class="py-4 px-8">商品金額</th>
+              <th class="py-4 px-8">個数</th>
+              <th class="py-4 px-8">合計</th>
+              <th class="py-4 px-8"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @cart_items.each do |cart_item| %>
+              <tr>
+                <td class="p-3">
+                  <div>
+                    <span class="font-bold text-xl"><%= cart_item.product.name %></span>
+                    <span class="text-sm">[在庫数(<%= cart_item.product.stock %>)] </span>
+                  </div>
+                </td>
+                <td class="p-3">
+                  <span class="text-lg"><%= number_to_currency(cart_item.product.price, unit: "¥", strip_insignificant_zeros: true) %></span>
+                </td>
+                <td class="p-3">
+                  <div class="d-flex justify-content-center">
+                    <%= link_to decrease_cart_item_path(cart_item), data: { "turbo-method": :patch }, class: "text-decoration-none me-3" do %>
+                      <svg class="fill-current text-red-500 bi bi-dash" width="24" height="24" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M2 8a1 1 0 0 1 1-1h10a1 1 0 0 1 0 2H3a1 1 0 0 1-1-1z"/>
+                      </svg>
+                    <% end %>
+                    <span class="mx-3 text-lg"><%= cart_item.quantity %></span>
+                    <% unless cart_item.quantity >= cart_item.product.stock %>
+                      <%= link_to increase_cart_item_path(cart_item), data: { "turbo-method": :patch }, class: "text-decoration-none me-3" do %>
+                        <svg class="fill-current text-blue-500 bi bi-plus" width="24" height="24" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+                          <path fill-rule="evenodd" d="M8 2a1 1 0 0 1 1 1v4h4a1 1 0 1 1 0 2h-4v4a1 1 0 1 1-2 0V9H3a1 1 0 1 1 0-2h4V3a1 1 0 0 1 1-1z"/>
+                        </svg>
+                      <% end %>
+                    <% end %>
+                  </div>
+                </td>
+                <td class="p-3">
+                  <span class="text-lg"><%= number_to_currency(cart_item.line_total, unit: "¥", strip_insignificant_zeros: true) %></span>
+                </td>
+                <td class="p-3">
+                  <%= link_to cart_item_path(cart_item), data: { "turbo-method": :delete, "turbo_confirm": 'Are you sure?' } do %>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-trash text-red-500" viewBox="0 0 16 16">
+                      <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+                      <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+                    </svg>
+                  <% end %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="border-b pb-6">
+        
+      </div>
+      <div class="my-6">
+        <div class="d-flex justify-content-between">
+          <span class="font-semibold text-lg">商品合計金額</span>
+          <span class="font-semibold text-lg"><%= number_to_currency(@total, unit: "¥", strip_insignificant_zeros: true) %></span>
+        </div>
+        <div class="d-flex justify-content-between">
+          <span class="font-semibold text-lg">送料</span>
+          <span class="font-semibold text-lg"><%= number_to_currency(POSTAGE, unit: "¥", strip_insignificant_zeros: true) %></span>
+        </div>
+        <div class="d-flex justify-content-between">
+          <span class="font-semibold text-lg">支払合計金額</span>
+          <span class="font-semibold text-lg"><%= number_to_currency(@total + POSTAGE, unit: "¥", strip_insignificant_zeros: true) %></span>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

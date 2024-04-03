@@ -14,5 +14,11 @@ Rails.application.routes.draw do
   end
   scope module: :customer do
     resources :products, only: %i[index show]
+    resources :cart_items, only: %i[index create destroy] do
+      member do
+        patch 'increase'
+        patch 'decrease'
+      end
+    end
   end
 end
