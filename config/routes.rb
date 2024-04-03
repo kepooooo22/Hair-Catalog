@@ -12,4 +12,7 @@ Rails.application.routes.draw do
   namespace :admin do
     resources :products, only: %i[index show new create edit update]
   end
+  scope module: :customer do
+    resources :products, only: %i[index show]
+  end
 end
