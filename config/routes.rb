@@ -10,7 +10,9 @@ Rails.application.routes.draw do
   root 'pages#index'
 
   namespace :admin do
+    root to: 'pages#index'
     resources :products, only: %i[index show new create edit update]
+    resources :orders, only: %i[show update]
   end
   scope module: :customer do
     resources :products, only: %i[index show]
