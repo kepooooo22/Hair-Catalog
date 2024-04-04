@@ -1,0 +1,71 @@
+<div class="mb-8 text-center">
+  <h2 class="text-3xl font-bold">注文詳細</h2>
+  <p class="text-xl font-bold"><%= l @order.created_at, format: :short %></p>
+</div>
+
+<div class="container px-6">
+  <div class="row">
+    <div class="col-xl-6">
+      <div class="card bg-light mb-4">
+        <div class="card-body">
+          <h3 class="text-lg font-semibold">注文商品</h3>
+          <% @order.order_details.each do |order_detail| %>
+            <%= link_to product_path(order_detail.product), class: "text-decoration-none text-dark" do %>
+              <div class="row mt-4">
+                <div class="col-md-4">
+                  <%= image_tag order_detail.product.image, class: "img-fluid rounded" %>
+                </div>
+                <div class="col-md-8">
+                  <h4 class="text-xl font-semibold"><%= order_detail.product.name %></h4>
+                  <p class="text-lg text-secondary"><%= number_to_currency(order_detail.price, unit: "¥", strip_insignificant_zeros: true) %></p>
+                  <p class="text-md text-secondary">個数: <%= order_detail.quantity %></p>
+                </div>
+              </div>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-6">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="card bg-light mb-4">
+            <div class="card-body">
+              <h3 class="text-xl font-semibold">請求金額</h3>
+              <div class="mb-4">
+                <p class="text-secondary">商品合計: <%= number_to_currency(@order.billing_amount - @order.postage, unit: "¥", strip_insignificant_zeros: true) %></p>
+                <p class="text-secondary">送料: <%= number_to_currency(@order.postage, unit: "¥", strip_insignificant_zeros: true) %></p>
+              </div>
+              <div class="d-flex justify-content-between">
+                <p class="text-xl font-semibold">合計支払金額:</p>
+                <p class="text-xl font-semibold"><%= number_to_currency(@order.billing_amount, unit: "¥", strip_insignificant_zeros: true) %></p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="card bg-light mb-4">
+            <div class="card-body">
+              <h3 class="text-xl font-semibold">お届け先情報</h3>
+              <div class="mb-4">
+                <p class="text-secondary">注文者名: <%= @order.name %></p>
+                <p class="text-secondary">郵便番号: <%= @order.postal_code %></p>
+                <p class="text-secondary">都道府県: <%= @order.prefecture %></p>
+                <p class="text-secondary">ご住所: <%= @order.address1 %></p>
+                <% if @order.address2.present? %>
+                  <p class="text-secondary">Address2: <%= @order.address2 %></p>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card bg-light mb-4">
+        <div class="card-body">
+          <h3 class="text-xl font-semibold">Order Status</h3>
+          <p>Latest Status: <span class="badge bg-info text-dark"><%= @order.status %></span></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

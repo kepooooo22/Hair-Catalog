@@ -23,6 +23,8 @@ module HairCatalog
     g.assets false
     g.skip_routes true
     g.test_framework false
-  end
+   end
+
+   config.time_zone = 'Tokyo'
   end
 end

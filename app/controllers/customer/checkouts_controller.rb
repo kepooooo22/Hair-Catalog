@@ -28,11 +28,11 @@ class Customer::CheckoutsController < ApplicationController
               amount: 500,
               currency: 'jpy'
             },
-            display_name: 'Single rate'
+            display_name: '全国一律'
           }
         }
       ],
-      success_url: root_url,
+      success_url: "#{root_url}orders/success",
       cancel_url: "#{root_url}cart_items"
     )
   end
