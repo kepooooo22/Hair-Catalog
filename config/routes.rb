@@ -21,5 +21,6 @@ Rails.application.routes.draw do
       end
     end
     resources :checkouts, only: [:create]
+    resources :webhooks, only: [:create]
   end
 end
