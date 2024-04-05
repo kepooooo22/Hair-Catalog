@@ -1,0 +1,18 @@
+<div class="bg-white p-6 md:mx-auto">
+  <div class="text-center">
+    <p class="md:text-2xl text-base text-gray-900 font-weight-bold">本当に退会しますか？</p>
+    <p class="text-gray-600 my-2">退会するとこのアカウントではログインできなくなります。</p>
+    <div class="d-flex justify-content-center gap-5">
+      <div class="py-8 text-center">
+        <%= link_to withdraw_customers_path, data: { "turbo-method": :patch }, class: "btn btn-danger" do %>
+          退会する
+        <% end %>
+      </div>
+      <div class="py-8 text-center">
+        <%= link_to edit_customer_registration_path, class: "btn btn-outline-secondary" do %>
+          キャンセル
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

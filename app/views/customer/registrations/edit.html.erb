@@ -41,6 +41,6 @@
 <% end %>
 
 
-<div><%= button_to "退会する", registration_path(resource_name), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :delete %></div>
-
-<%= link_to "戻る", :back %>
+<div class="text-center font-weight-bold text-danger">
+  <%= link_to "退会する", confirm_withdraw_customers_path, class: "text-danger" %>
+</div>
