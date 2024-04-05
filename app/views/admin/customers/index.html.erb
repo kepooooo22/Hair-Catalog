@@ -1,0 +1,56 @@
+<div class="mb-5 text-center">
+  <h1 class="text-3xl font-bold">
+    顧客一覧
+  </h1>
+</div>
+
+<div class="row">
+  <div class="col">
+    <div class="card">
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table table-bordered table-hover">
+            <thead>
+              <tr>
+                <th class="px-6 py-3 font-bold text-left uppercase">会員名</th>
+                <th class="px-6 py-3 font-bold text-left uppercase">Email</th>
+                <th class="px-6 py-3 font-bold text-center uppercase">ステータス</th>
+                <th class="px-6 py-3 font-bold text-center uppercase">注文数</th>
+                <th class="px-6 py-3 font-bold text-center uppercase"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @customers.each do |customer| %>
+                <tr>
+                  <td class="p-2 align-middle">
+                    <%= customer.name %>
+                  </td>
+                  <td class="p-2 align-middle">
+                    <%= customer.email %>
+                  </td>
+                  <td class="p-2 align-middle text-center">
+                    <% if customer.status === "normal" %>
+                      <span class="badge bg-primary">Normal</span>
+                    <% elsif customer.status === "withdrawn" %>
+                      <span class="badge bg-warning text-dark">Withdrawn</span>
+                    <% else %>
+                      <span class="badge bg-danger">Banned</span>
+                    <% end %>
+                  </td>
+                  <td class="p-2 align-middle text-center">
+                    <%= customer.orders.size %>
+                  </td>
+                  <td class="p-2 align-middle">
+                    <%= link_to admin_customer_path(customer), class: "text-primary" do %>
+                      詳細
+                    <% end %>
+                  </td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
