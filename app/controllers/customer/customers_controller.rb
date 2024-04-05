@@ -1,7 +1,7 @@
 class Customer::CustomersController < ApplicationController
   before_action :authenticate_customer!
 
-  def confirm_withdraw;
+  def confirm_withdraw
   end
 
   def withdraw
