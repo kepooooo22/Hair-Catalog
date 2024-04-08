@@ -27,7 +27,7 @@
   </head>
 
   <body>
- <% unless current_page?(new_customer_registration_path) || current_page?(new_customer_session_path) %>
+ <% unless current_page?(new_customer_registration_path) || current_page?(new_customer_session_path)|| current_page?(root_path) %>
     <header data-bs-theme="dark">
       <nav class="navbar navbar-expand-lg" style="background-color: #CC9999;">
         <div class="container-fluid">

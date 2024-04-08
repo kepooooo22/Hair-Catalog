@@ -39,9 +39,12 @@
   <div class="actions">
     <%= f.submit "更新する" %>
   </div>
+  <div class="text-end">
+     <%= link_to "戻る", products_path, class: "btn btn-outline-secondary" %>
+  </div>
 <% end %>
 
 
-<div class="text-center font-weight-bold text-danger">
+<div class="text-end font-weight-bold text-danger">
   <%= link_to "退会する", confirm_withdraw_customers_path, class: "text-danger" %>
 </div>

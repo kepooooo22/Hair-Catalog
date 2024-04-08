@@ -66,6 +66,9 @@
           <p>Latest Status: <span class="badge bg-info text-dark"><%= @order.status %></span></p>
         </div>
       </div>
+      <div class="text-end">
+         <%= link_to "戻る", orders_path, class: "btn btn-outline-secondary" %>
+      </div>
     </div>
   </div>
 </div>

@@ -43,5 +43,7 @@
     </div>
   <% end %>
 
-  <h2 class="text-center p-5">ログインは<%= link_to "こちら", new_customer_session_path %></h2>
+  <h2 class="text-center p-5">会員登録がお済みの方は<%= link_to "こちら", new_customer_session_path %></h2>
+  <%= link_to "戻る", products_path, class: "btn btn-outline-secondary" %>
+
 </main>
