@@ -27,7 +27,7 @@
   </head>
 
   <body>
- <%# unless current_page?(new_customer_session_path) || current_page?(new_admin_session_path) %>
+ <% unless current_page?(new_customer_registration_path) || current_page?(new_customer_session_path) %>
     <header data-bs-theme="dark">
       <nav class="navbar navbar-expand-lg" style="background-color: #CC9999;">
         <div class="container-fluid">
@@ -60,7 +60,7 @@
                 <a class="nav-link" href="#">お問い合わせ</a>
               </li>
               <li class="nav-item">
-                <%= link_to current_customer.name,'#', class: "nav-link"%>
+                <%= link_to current_customer.name, edit_customer_registration_path, class: "nav-link" %>
               </li>
               <li class="nav-item">
                 <%= link_to "ログアウト", destroy_customer_session_path, data: { turbo_method: :delete }, class: "nav-link"%>
@@ -91,7 +91,7 @@
         </div>
       </nav>
     </header>
- <%# end %> 
+ <% end %> 
     <%= yield %>
   </body>
 </html>
